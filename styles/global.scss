@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  #__next {
+    @apply h-full w-full flex flex-col;
+  }
+
+  html,
+  body {
+    @apply h-full w-full min-h-full;
+  }
+}
