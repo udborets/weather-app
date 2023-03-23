@@ -11,8 +11,8 @@ const NavbarLink = ({ href, children: text }: NavbarLinkProps) => {
   const { asPath } = useRouter();
   const isCurrentPage = asPath === href;
   return (
-    <li className='w-fit h-fit'>
-      <Link href={href} className={`p-1 ${isCurrentPage ? "text-sky" : "text-black"} text-[1.17rem] hover:text-sky transition-all duration-500 ease-out ${ubuntuBold.className}`}>
+    <li className='navbarLink w-fit h-fit'>
+      <Link href={href} className={`navbarLink__link p-1 ${isCurrentPage ? "text-sky" : "text-black"} text-[1.17rem] hover:text-sky transition-all duration-500 ease-out ${ubuntuBold.className}`}>
         {text}
       </Link>
     </li>
