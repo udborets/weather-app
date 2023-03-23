@@ -1,12 +1,6 @@
-import React from 'react'
+import Link from 'next/link';
 
-import { Ubuntu } from 'next/font/google'
-import Link from 'next/link'
-
-const ubuntu = Ubuntu({
-  subsets: ["latin"],
-  weight: "700",
-})
+import { ubuntuBold } from "@/fonts/ubuntu";
 
 const Header = () => {
   return (
@@ -14,10 +8,10 @@ const Header = () => {
       <div className="header__container flex w-4/5 h-full min-h-ful">
         <Link href="/" className="w-fit h-fit self-center">
           <h2 className="header__title w-fit h-fit">
-            <span className={`title__blue text-[1.7rem] pl-3 text-[#089cfc] ${ubuntu.className}`}>
+            <span className={`title__blue text-[1.7rem] pl-3 text-[#089cfc] ${ubuntuBold.className}`}>
               My
             </span>
-            <span className={`title-black text-[1.7rem] text-black pr-3 border-r-[1px] ${ubuntu.className}`}>
+            <span className={`title-black text-[1.7rem] text-black pr-3 border-r-[1px] ${ubuntuBold.className}`}>
               Weather
             </span>
           </h2>
