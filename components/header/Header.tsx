@@ -23,8 +23,8 @@ const Header = () => {
           <NavbarLink href="/">
             Home
           </NavbarLink>
-          <NavbarLink href="/testi">
-            testi
+          <NavbarLink href="/">
+            Dev test
           </NavbarLink>
         </Navbar>
       </div>
