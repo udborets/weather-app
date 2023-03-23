@@ -1,15 +1,19 @@
+import { ubuntu, ubuntuBold } from "@/fonts/ubuntu";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface NavbarLinkProps {
   href: string;
   children: string;
 }
 
-const NavbarLink = ({ href, children }: NavbarLinkProps) => {
+const NavbarLink = ({ href, children: text }: NavbarLinkProps) => {
+  const { asPath } = useRouter();
+  const isCurrentPage = asPath === href;
   return (
-    <li>
-      <Link href={href} className="">
-        {children}
+    <li className='w-fit h-fit'>
+      <Link href={href} className={`p-1 ${isCurrentPage ? "text-sky" : "text-black"} text-[1.17rem] hover:text-sky transition-all duration-500 ease-out ${ubuntuBold.className}`}>
+        {text}
       </Link>
     </li>
   )
