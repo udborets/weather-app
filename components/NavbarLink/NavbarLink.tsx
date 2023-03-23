@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { ubuntuBold } from "@/fonts/ubuntu";
+import { ubuntuBold } from "$/fonts/ubuntu";
 
 interface INavbarLinkProps {
   href: string;
