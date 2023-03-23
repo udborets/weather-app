@@ -11,4 +11,8 @@
   body {
     @apply h-full w-full min-h-full;
   }
+
+  .text-sky {
+    @apply text-[#089cfc];
+  }
 }
