@@ -8,7 +8,7 @@ interface INavbarLinkProps {
   children: string;
 }
 
-const NavbarLink = ({ href, children: text }: INavbarLinkProps) => {
+export const NavbarLink = ({ href, children: text }: INavbarLinkProps) => {
   const { asPath } = useRouter();
   const isCurrentPage = asPath === href;
   return (
@@ -19,5 +19,3 @@ const NavbarLink = ({ href, children: text }: INavbarLinkProps) => {
     </li>
   )
 }
-
-export default NavbarLink
