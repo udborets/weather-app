@@ -1,6 +1,6 @@
-import { useDebounce } from '$/hooks/useDebounce';
-import { getIp } from '$/services/ip';
-import { getWeatherLink } from '$/services/weather';
+import { useDebounce } from '@/hooks/useDebounce';
+import { getIp } from '@/services/ip';
+import { getWeatherLink } from '@/services/weather';
 import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
