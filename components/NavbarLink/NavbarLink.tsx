@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 
 import { ubuntuBold } from "@/fonts/ubuntu";
 
-interface NavbarLinkProps {
+interface INavbarLinkProps {
   href: string;
   children: string;
 }
 
-const NavbarLink = ({ href, children: text }: NavbarLinkProps) => {
+const NavbarLink = ({ href, children: text }: INavbarLinkProps) => {
   const { asPath } = useRouter();
   const isCurrentPage = asPath === href;
   return (
