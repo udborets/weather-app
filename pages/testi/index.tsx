@@ -1,15 +1,23 @@
+import { getIp } from '@/services/ip'
+import { getWeatherLink } from '@/services/weather'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useQuery } from 'react-query'
 
+
 const Index = () => {
-  const [ip, setIp] = useState<any>();
-  useEffect(() => {
-    axios.get("https://ipwho.is/")
-      .then((data) => setIp(data.data?.ip))
+  const { data: name } = useQuery({
+    queryFn: async () => {
+      const userIp = await getIp();
+      if (!userIp) return;
+      const req = (await axios.get(getWeatherLink(userIp))).data
+      return req?.location.tz_id
+    }
   })
   return (
-    <div>{ip}</div>
+    <div>
+      {name}
+    </div>
   )
 }
 
