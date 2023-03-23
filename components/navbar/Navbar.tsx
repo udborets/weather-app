@@ -4,8 +4,8 @@ interface NavbarProps {
 
 const Navbar = ({ children }: NavbarProps) => {
   return (
-    <nav>
-      <ul>
+    <nav className='navbar grid items-center'>
+      <ul className="navbar__links flex gap-3 self-center align-center w-full">
         {children}
       </ul>
     </nav>
