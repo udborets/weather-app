@@ -20,11 +20,11 @@ export default function Home() {
   })
   useEffect(() => {
     if (debouncedSearch) {
-      axios.get(`https://api.weatherapi.com/v1/search.json?key=ab894dc3ab404d8ea35140003232203 &q=${debouncedSearch}`)
+      axios.get(`${getWeatherLink(debouncedSearch)}`)
         .then((data) => console.log(data))
     }
     if (!debouncedSearch && name) {
-      axios.get(`https://api.weatherapi.com/v1/search.json?key=ab894dc3ab404d8ea35140003232203 &q=${name}`)
+      axios.get(`${getWeatherLink(name)}`)
         .then((data) => console.log(data))
     }
   }, [debouncedSearch, name])
