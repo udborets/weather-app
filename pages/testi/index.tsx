@@ -1,8 +1,9 @@
-import { getIp } from '@/services/ip';
-import { getWeatherLink } from '@/services/weather';
 import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
+
+import { getIp } from '@/services/ip';
+import { getWeatherLink } from '@/services/weather';
 
 
 const Index = () => {

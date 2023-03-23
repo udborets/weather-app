@@ -1,6 +1,7 @@
-import { ubuntu, ubuntuBold } from "@/fonts/ubuntu";
 import Link from "next/link";
 import { useRouter } from "next/router";
+
+import { ubuntuBold } from "@/fonts/ubuntu";
 
 interface NavbarLinkProps {
   href: string;

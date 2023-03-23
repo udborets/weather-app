@@ -1,8 +1,8 @@
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import '@/styles/global.scss';
 import Header from '@/components/header/Header';
+import '@/styles/global.scss';
 
 const queryClient = new QueryClient()
 
