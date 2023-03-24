@@ -17,7 +17,6 @@ export default function Home() {
         if (debouncedSearch && debouncedSearch.length >= 3) {
           const req = (await axios.get<{ location: { tz_id: string } }>(getWeatherLink(debouncedSearch)));
           if (req.data) {
-            console.log
             return req.data.location.tz_id;
           }
         }
