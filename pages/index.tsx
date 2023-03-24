@@ -1,10 +1,12 @@
-import { useDebounce } from '@/hooks/useDebounce';
-import { getIp } from '@/services/ip';
-import { getWeatherLink } from '@/services/weather';
 import axios, { AxiosError } from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+
+import CitySearchBar from '@/components/citysearchbar/CitySearchBar';
+import { useDebounce } from '@/hooks/useDebounce';
+import { getIp } from '@/services/ip';
+import { getWeatherLink } from '@/services/weather';
 
 export default function Home() {
   const [search, setSearch] = useState<string>('')
@@ -43,7 +45,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="w-full h-full">
-        <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." className='border-2 text-[1rem] px-2 py-1' />
+        <CitySearchBar search={search} setSearch={setSearch} />
         {city}
       </div>
     </>
