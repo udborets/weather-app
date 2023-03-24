@@ -1,3 +1,3 @@
 export function getWeatherLink(param: string) {
-  return `https://api.weatherapi.com/v1/current.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY} &q=${param}`;
+  return `https://api.openweathermap.org/data/2.5/forecast?q=${param}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`;
 }
