@@ -12,8 +12,6 @@ export default function Home() {
   const { data: city, refetch } = useQuery({
     queryFn: async () => {
       try {
-        const userIp = await getIp();
-        if (!userIp) return '';
         if (debouncedSearch && debouncedSearch.length >= 3) {
           const req = (await axios.get<{ location: { tz_id: string } }>(getWeatherLink(debouncedSearch)));
           if (req.data) {
@@ -21,6 +19,8 @@ export default function Home() {
             return req.data.location.tz_id;
           }
         }
+        const userIp = await getIp();
+        if (!userIp) return '';
         const req = (await axios.get<{ location: { tz_id: string } }>(getWeatherLink(userIp))).data;
         return req.location.tz_id;
       }
