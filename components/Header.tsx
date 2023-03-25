@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { Navbar } from '@/components/Navbar/Navbar';
-import { NavbarLink } from '@/components/NavbarLink/NavbarLink';
+import { Navbar } from '@/components/Navbar';
+import { NavbarLink } from '@/components/NavbarLink';
 import { ubuntuBold } from "@/fonts/ubuntu";
 
 const Header = () => {
