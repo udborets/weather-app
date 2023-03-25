@@ -2,14 +2,14 @@ import { get, query, ref } from 'firebase/database';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
-import SearchBarResult from '@/components/searchbarresult/SearchBarResult';
+import CitySearchBarItem from '@/components/CitySearchBarItem/CitySearchBarItem';
 import { database } from '@/firebase/database';
 import { useDebounce } from '@/hooks/useDebounce';
 import { City } from '@/models/city';
 
 let loaded = false;
 
-const SearchBar = () => {
+const CitySearchBar = () => {
   const [search, setSearch] = useState<string>('')
   const debouncedSearch = useDebounce(search, 10);
   const [filteredCities, setFilteredCities] = useState<City[]>([]);
@@ -50,11 +50,11 @@ const SearchBar = () => {
       />
       <div className="searchBar__results absolute">
         {filteredCities?.slice(0, 6).map((city) => (
-          <SearchBarResult city={city} key={city.id} />
+          <CitySearchBarItem city={city} key={city.id} />
         ))}
       </div>
     </div>
   )
 }
 
-export default SearchBar
+export default CitySearchBar
