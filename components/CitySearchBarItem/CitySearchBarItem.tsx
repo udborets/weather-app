@@ -1,10 +1,10 @@
 import { City } from "@/models/city"
 
-interface SearchBarResultProps {
+interface ICitySearchBarItemProps {
   city: City;
 }
 
-const SearchBarResult = ({ city }: SearchBarResultProps) => {
+const CitySearchBarItem = ({ city }: ICitySearchBarItemProps) => {
   return (
     <div className="searchBarResult px-3 py-2 border-b-2 last-of-type:border-b-0 text-black bg-white hover:text-white hover:bg-sky w-[300px]">
       <div className="searchBarResult__container gap-3 flex justify-start relative">
@@ -27,4 +27,4 @@ const SearchBarResult = ({ city }: SearchBarResultProps) => {
   )
 }
 
-export default SearchBarResult
+export default CitySearchBarItem
