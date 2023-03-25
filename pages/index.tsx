@@ -1,52 +1,57 @@
-import axios, { AxiosError } from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 
 import CitySearchBar from '@/components/citysearchbar/CitySearchBar';
 import { useDebounce } from '@/hooks/useDebounce';
-import { getIp } from '@/services/ip';
-import { getWeatherLink } from '@/services/weather';
+import { database } from '@/firebase/database';
+import { get, query, ref } from 'firebase/database';
+
+let loaded = false;
+
+interface city {
+  coord: {
+    lat: number;
+    lon: number;
+  };
+  country: string;
+  id: number;
+  name: string;
+  state: string;
+}
 
 export default function Home() {
   const [search, setSearch] = useState<string>('')
-  const debouncedSearch = useDebounce(search, 1000);
-  const { data: city, refetch } = useQuery({
-    queryFn: async () => {
-      try {
-        if (debouncedSearch && debouncedSearch.length >= 3) {
-          const req = (await axios.get<{ location: { tz_id: string } }>(getWeatherLink(debouncedSearch)));
-          if (req.data) {
-            return req.data.location.tz_id;
-          }
-        }
-        const userIp = await getIp();
-        if (!userIp) return '';
-        const req = (await axios.get<{ location: { tz_id: string } }>(getWeatherLink(userIp))).data;
-        return req.location.tz_id;
-      }
-      catch (e: unknown) {
-        if (e && e instanceof AxiosError && e.status !== 200 && e.status !== 400) {
-          console.log(e);
-          return '';
-        }
-      }
-    },
-    refetchInterval: 3600000,
-  })
+  const debouncedSearch = useDebounce(search, 10);
+  const [allCities, setAllCities] = useState<city[]>([])
+  const [filteredCities, setFilteredCities] = useState<city[]>([]);
   useEffect(() => {
-    refetch();
-  }, [debouncedSearch, refetch])
+    if (loaded) return;
+    loaded = true;
+    const que = query(ref(database))
+    const allFetchedCities: city[] = []
+    get(que).then((data) => {
+      data.forEach((snap) => {
+        allFetchedCities.push(snap.val());
+      })
+      setAllCities(allFetchedCities)
+    })
+  }, [])
+  useEffect(() => {
+    setFilteredCities(allCities.filter(({ name }) => name.includes(debouncedSearch)))
+  }, [debouncedSearch])
   return (
     <>
       <Head>
         <title>Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className="w-full h-full">
+      <div className="w-full h-full flex flex-col">
         <CitySearchBar search={search} setSearch={setSearch} />
-        {city}
+        {filteredCities?.slice(0, 6).map((city) => (<div key={city.id}>{city.name} {city.country}  {city.coord.lat} {city.coord.lon}</div>))}
       </div>
+      <button onClick={() => console.log(allCities)}>
+        fedf
+      </button>
     </>
   )
 }
