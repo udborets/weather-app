@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import Header from '@/components/Header';
+import Header from '@/components/Header/Header';
 import PageLayout from '@/layouts/pagelayout/PageLayout';
 import '@/styles/global.scss';
 import SearchBar from '@/components/CitySearchBar/CitySearchBar';
