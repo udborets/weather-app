@@ -36,7 +36,7 @@ const SearchBar = () => {
       setFilteredCities([]);
       return;
     }
-    setFilteredCities(allCities.data.filter(({ name }) => name.includes(debouncedSearch)))
+    setFilteredCities(allCities.data.filter(({ name }) => name.toLowerCase().includes(debouncedSearch.toLowerCase())))
   }, [debouncedSearch, allCities.data])
   return (
     <div className="searchBar">
