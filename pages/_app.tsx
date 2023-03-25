@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Header from '@/components/header/Header';
 import PageLayout from '@/layouts/pagelayout/PageLayout';
 import '@/styles/global.scss';
+import SearchBar from '@/components/searchbar/SearchBar';
 
 const queryClient = new QueryClient();
 
@@ -12,6 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <QueryClientProvider client={queryClient}>
         <Header />
+        <SearchBar />
         <PageLayout>
           <Component {...pageProps} />
         </PageLayout>
