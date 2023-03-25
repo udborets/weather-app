@@ -65,9 +65,6 @@ export default function Home() {
         />
         {filteredCities?.slice(0, 6).map((city) => (<div key={city.id}>{city.name} {city.country}  {city.coord.lat} {city.coord.lon}</div>))}
       </div>
-      <button onClick={() => console.log(allCities)}>
-        fedf
-      </button>
     </>
   )
 }
