@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-import CitySearchBar from '@/components/citysearchbar/CitySearchBar';
 import { useDebounce } from '@/hooks/useDebounce';
 import { database } from '@/firebase/database';
 import { get, query, ref } from 'firebase/database';
+import { useQuery } from 'react-query';
 
 let loaded = false;
 
-interface city {
+interface City {
   coord: {
     lat: number;
     lon: number;
@@ -22,23 +22,32 @@ interface city {
 export default function Home() {
   const [search, setSearch] = useState<string>('')
   const debouncedSearch = useDebounce(search, 10);
-  const [allCities, setAllCities] = useState<city[]>([])
-  const [filteredCities, setFilteredCities] = useState<city[]>([]);
-  useEffect(() => {
-    if (loaded) return;
-    loaded = true;
-    const que = query(ref(database))
-    const allFetchedCities: city[] = []
-    get(que).then((data) => {
-      data.forEach((snap) => {
-        allFetchedCities.push(snap.val());
+  const [filteredCities, setFilteredCities] = useState<City[]>([]);
+  const allCities = useQuery({
+    queryFn: async () => {
+      if (loaded) return;
+      loaded = true;
+      const que = query(ref(database));
+      const allFetchedCities: City[] = [];
+      const rootSnap = await get(que);
+      rootSnap.forEach((childSnap) => {
+        allFetchedCities.push(childSnap.val());
       })
-      setAllCities(allFetchedCities)
-    })
-  }, [])
+      return allFetchedCities;
+    },
+    refetchInterval: 9999999999999,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  })
   useEffect(() => {
-    setFilteredCities(allCities.filter(({ name }) => name.includes(debouncedSearch)))
-  }, [debouncedSearch])
+    if (!allCities.data) return;
+    if (!debouncedSearch) {
+      setFilteredCities([]);
+      return;
+    }
+    setFilteredCities(allCities.data.filter(({ name }) => name.includes(debouncedSearch)))
+  }, [debouncedSearch, allCities.data])
   return (
     <>
       <Head>
@@ -46,7 +55,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="w-full h-full flex flex-col">
-        <CitySearchBar search={search} setSearch={setSearch} />
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder={allCities.isLoading ? "Cities loading..." : "Search..."}
+          className='w-[300px] border-2 text-[1rem] px-2 py-1'
+          disabled={allCities.isLoading}
+        />
         {filteredCities?.slice(0, 6).map((city) => (<div key={city.id}>{city.name} {city.country}  {city.coord.lat} {city.coord.lon}</div>))}
       </div>
       <button onClick={() => console.log(allCities)}>
