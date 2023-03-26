@@ -21,7 +21,8 @@
     "react-dom": "18.2.0",
     "react-query": "^3.39.3",
     "sass": "^1.60.0",
-    "typescript": "5.0.2"
+    "typescript": "5.0.2",
+    "zustand": "^4.3.6"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
