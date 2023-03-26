@@ -1,4 +1,4 @@
-import { MongoClient, ConnectOptions } from "mongodb";
+import { ConnectOptions, MongoClient } from "mongodb";
 
 export async function GET(
   request: Request,

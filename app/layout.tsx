@@ -1,5 +1,5 @@
-import '@/styles/global.scss'
 import PageLayout from '@/layouts/PageLayout';
+import '@/styles/global.scss';
 
 export const metadata = {
   title: 'My Weather',

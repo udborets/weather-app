@@ -1,12 +1,12 @@
 'use client'
 
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import CitySearchBarItem from '@/components/CitySearchBarItem/CitySearchBarItem';
 import { useDebounce } from '@/hooks/useDebounce';
 import { City } from '@/models/city';
-import axios from 'axios';
 
 const CitySearchBar = () => {
   const [search, setSearch] = useState<string>('')

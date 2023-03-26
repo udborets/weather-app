@@ -1,9 +1,10 @@
 'use client'
 
+import { ReactNode } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import CitySearchBar from "@/components/CitySearchBar/CitySearchBar";
 import Header from "@/components/Header/Header";
-import { ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "react-query"
 
 const queryClient = new QueryClient();
 
