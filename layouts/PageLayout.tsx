@@ -10,15 +10,13 @@ const queryClient = new QueryClient();
 const PageLayout = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <body>
-        <Header />
-        <CitySearchBar />
-        <main className={`p-2 flex justify-center items-center flex-grow w-full h-full`}>
-          <div className="page__container h-full w-full flex flex-grow">
-            {children}
-          </div>
-        </main>
-      </body>
+      <Header />
+      <CitySearchBar />
+      <main className={`p-2 flex justify-center items-center flex-grow w-full h-full`}>
+        <div className="page__container h-full w-full flex flex-grow">
+          {children}
+        </div>
+      </main>
     </QueryClientProvider>
   )
 }
