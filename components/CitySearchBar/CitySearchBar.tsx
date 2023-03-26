@@ -7,9 +7,12 @@ import { useQuery } from 'react-query';
 import CitySearchBarItem from '@/components/CitySearchBarItem/CitySearchBarItem';
 import { useDebounce } from '@/hooks/useDebounce';
 import { City } from '@/models/city';
+import { Store, useChosenCity } from '@/store/useChosenCity';
 
 const CitySearchBar = () => {
-  const [search, setSearch] = useState<string>('')
+  const [search, setSearch] = useState<string>('');
+  const chosenCity = useChosenCity((state: any) => state.chosenCity);
+  const chooseCity = useChosenCity((state: any) => state.setChosenCity);
   const debouncedSearch = useDebounce(search, 500);
   const cities = useQuery({
     queryFn: async () => {
@@ -43,6 +46,12 @@ const CitySearchBar = () => {
         {cities.data?.slice(0, 6).map((city) => (
           <CitySearchBarItem city={city} key={city.id} />
         ))}
+        <button onClick={() => { if (cities.data?.length) chooseCity(cities.data[2]) }}>
+          haha
+        </button>
+        {
+          chosenCity?.coord?.lon
+        }
       </div>
     </div>
   )
