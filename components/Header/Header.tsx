@@ -23,7 +23,11 @@ const Header = () => {
           <NavbarLink href="/">
             Home
           </NavbarLink>
+<<<<<<< HEAD
           <NavbarLink href="/f">
+=======
+          <NavbarLink href="/">
+>>>>>>> e447c6cbc073bbd9c4471de428231d75170d4756
             Dev test
           </NavbarLink>
         </Navbar>
