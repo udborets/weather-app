@@ -20,8 +20,10 @@ export async function GET(
     useNewUrlParser: true,
     useUnifiedTopology: true,
   } as ConnectOptions;
+  if (!process.env.NEXT_PUBLIC_MONGODB_CONFIG)
+    return new Response(JSON.stringify({ error: "can't get mongodb config" }));
   const client = await MongoClient.connect(
-    "mongodb+srv://udborets:OneOfMyFavs3@udborets.rixeocn.mongodb.net/udborets?retryWrites=true&w=majority",
+    process.env.NEXT_PUBLIC_MONGODB_CONFIG,
     options
   );
   const coll = client.db("udborets").collection("cities");
