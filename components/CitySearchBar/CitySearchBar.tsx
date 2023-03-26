@@ -15,7 +15,10 @@ const CitySearchBar = () => {
     queryFn: async () => {
       if (!debouncedSearch) return [];
       const fetchedCities = await axios.get<City[]>(`/api/cities/${debouncedSearch}`);
-      console.log(fetchedCities)
+      if (fetchedCities.status !== 200) {
+        console.warn(fetchedCities.data);
+        return [];
+      }
       return fetchedCities.data;
       // return []
     },
