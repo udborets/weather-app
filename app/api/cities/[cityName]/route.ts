@@ -21,16 +21,21 @@ export async function GET(
     useUnifiedTopology: true,
   } as ConnectOptions;
   if (!process.env.NEXT_PUBLIC_MONGODB_CONFIG) {
-    console.error("can't get mongodb config")
+    console.error("can't get mongodb config");
     return new Response(JSON.stringify({ error: "can't get mongodb config" }));
   }
-  const client = await MongoClient.connect(
-    process.env.NEXT_PUBLIC_MONGODB_CONFIG,
-    options
-  );
-  const coll = client.db("udborets").collection("cities");
-  const cursor = coll.aggregate(agg);
-  const result = await cursor.toArray();
-  await client.close();
-  return new Response(JSON.stringify(result));
+  try {
+    const client = await MongoClient.connect(
+      process.env.NEXT_PUBLIC_MONGODB_CONFIG,
+      options
+    );
+    const coll = client.db("udborets").collection("cities");
+    const cursor = coll.aggregate(agg);
+    const result = await cursor.toArray();
+    await client.close();
+    return new Response(JSON.stringify(result));
+  } catch (e) {
+    console.error(e);
+    return new Response(JSON.stringify(e));
+  }
 }
