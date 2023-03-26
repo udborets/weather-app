@@ -23,9 +23,6 @@ const Header = () => {
           <NavbarLink href="/">
             Home
           </NavbarLink>
-          <NavbarLink href="/f">
-            Dev test
-          </NavbarLink>
         </Navbar>
       </div>
     </header >

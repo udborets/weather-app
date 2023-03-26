@@ -1,5 +1,5 @@
 interface INavbarProps {
-  children: JSX.Element[];
+  children: JSX.Element[] | JSX.Element;
 }
 
 export const Navbar = ({ children }: INavbarProps) => {
