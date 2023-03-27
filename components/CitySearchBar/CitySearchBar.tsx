@@ -60,15 +60,16 @@ const CitySearchBar = () => {
           ? <LoadingSpinner />
           : <></>}
       </div>
-      <div className="searchBar__results absolute">
-        {isShowingSearchResults
-          ? ((cities.data && cities.data.length !== 0)
+      {isShowingSearchResults
+        ?
+        <div className="searchBar__results absolute flex flex-col gap-2 border-2 border-gray-500 my-1 rounded-[5px] p-2 w-[300px]">
+          {(cities.data && cities.data.length !== 0)
             ? cities.data.slice(0, 6).map((city) => (
               <CitySearchBarItem city={city} key={city.id} hideSearchResultsFn={() => setIsShowingSearchResults(false)} />
             ))
-            : <CitySearchBarItem noResultText='No results' hideSearchResultsFn={() => setIsShowingSearchResults(false)} />)
-          : <></>}
-      </div>
+            : <CitySearchBarItem noResultText='No results' hideSearchResultsFn={() => setIsShowingSearchResults(false)} />}
+        </div>
+        : <></>}
     </div>
   )
 }
