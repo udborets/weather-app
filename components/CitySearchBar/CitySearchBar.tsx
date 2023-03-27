@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import CitySearchBarItem from '@/components/CitySearchBarItem/CitySearchBarItem';
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 import { useDebounce } from '@/hooks/useDebounce';
 import { City } from '@/models/city';
 import { useChosenCity } from '@/store/useChosenCity';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const CitySearchBar = () => {
   const [search, setSearch] = useState<string>('');
@@ -53,7 +53,7 @@ const CitySearchBar = () => {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder={cities.isLoading ? "Cities loading..." : "Search..."}
+          placeholder={cities.isLoading ? "Cities loading..." : "Search city..."}
           className='searchBar__input w-full h-full text-[1rem] px-2 py-1'
         />
         {(cities.isLoading || cities.isRefetching)
