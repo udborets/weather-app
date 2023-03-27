@@ -13,7 +13,6 @@ const PageLayout = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Header />
-      <CitySearchBar />
       <main className={`${styles.pageLayout} flex justify-center items-center flex-grow w-full h-full`}>
         <div className="pageLayout__container h-full w-full flex flex-grow">
           {children}
