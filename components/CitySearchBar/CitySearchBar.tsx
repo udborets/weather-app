@@ -27,8 +27,7 @@ const CitySearchBar = () => {
           console.error(fetchedCities);
           return [];
         }
-        if (fetchedCities.data.length)
-          setIsShowingSearchResults(true);
+        setIsShowingSearchResults(true);
         const cityNames: string[] = [];
         return fetchedCities.data.filter((city) => {
           if (cityNames.includes(city.name)) return false;
@@ -63,12 +62,11 @@ const CitySearchBar = () => {
       </div>
       <div className="searchBar__results absolute">
         {isShowingSearchResults
-          ?
-          cities?.data?.length
+          ? ((cities.data && cities.data.length !== 0)
             ? cities.data.slice(0, 6).map((city) => (
               <CitySearchBarItem city={city} key={city.id} hideSearchResultsFn={() => setIsShowingSearchResults(false)} />
             ))
-            : <div>No results</div>
+            : <CitySearchBarItem noResultText='No results' hideSearchResultsFn={() => setIsShowingSearchResults(false)} />)
           : <></>}
       </div>
     </div>
