@@ -10,8 +10,8 @@ interface ICitySearchBarItemProps {
 const CitySearchBarItem = ({ city, hideSearchResultsFn, noResultText }: ICitySearchBarItemProps) => {
   const setChosenCity = useChosenCity((store: any) => store.setChosenCity);
   return (
-    <div className="searchBarResult px-3 py-2 border-b-2 
-     transition-colors duration-200 last-of-type:border-b-0 text-black bg-white hover:text-white hover:bg-sky w-[300px]"
+    <div className="searchBarResult px-3 py-2 border-b-2 rounded-[10px] transition-colors duration-200 text-black 
+    bg-white hover:text-white hover:bg-sky w-full"
       onClick={() => {
         if (city) {
           setChosenCity(city);
