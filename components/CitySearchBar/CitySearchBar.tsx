@@ -59,12 +59,6 @@ const CitySearchBar = () => {
           ))
           : <></>}
       </div>
-      <button onClick={() => { if (cities.data?.length) chooseCity(cities.data[2]) }}>
-        haha
-      </button>
-      {
-        chosenCity?.coord?.lon
-      }
     </div>
   )
 }
