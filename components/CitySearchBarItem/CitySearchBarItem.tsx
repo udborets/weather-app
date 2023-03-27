@@ -1,4 +1,4 @@
-import { City } from "@/models/city"
+import { City } from "@/models/city";
 import { useChosenCity } from "@/store/useChosenCity";
 
 interface ICitySearchBarItemProps {
