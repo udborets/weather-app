@@ -37,7 +37,7 @@ const CitySearchBar = () => {
   })
   useEffect(() => {
     cities.refetch()
-  }, [debouncedSearch])
+  }, [debouncedSearch, cities])
   return (
     <div className="searchBar">
       <div className='searchBar__bar flex justify-between w-[300px] border-2 relative'>
