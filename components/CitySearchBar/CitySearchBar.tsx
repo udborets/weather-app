@@ -25,7 +25,6 @@ const CitySearchBar = () => {
           return [];
         }
         return fetchedCities.data;
-        // return []
       }
       catch (e: unknown) {
         console.error(e);
@@ -37,7 +36,7 @@ const CitySearchBar = () => {
   })
   useEffect(() => {
     cities.refetch()
-  }, [debouncedSearch, cities])
+  }, [debouncedSearch])
   return (
     <div className="searchBar">
       <div className='searchBar__bar flex justify-between w-[300px] border-2 relative'>
@@ -54,9 +53,11 @@ const CitySearchBar = () => {
           : <></>}
       </div>
       <div className="searchBar__results absolute">
-        {cities.data?.slice(0, 6).map((city) => (
-          <CitySearchBarItem city={city} key={city.id} />
-        ))}
+        {Array.isArray(cities.data)
+          ? cities.data.slice(0, 6).map((city) => (
+            <CitySearchBarItem city={city} key={city.id} />
+          ))
+          : <></>}
       </div>
       <button onClick={() => { if (cities.data?.length) chooseCity(cities.data[2]) }}>
         haha
