@@ -39,9 +39,9 @@ const CitySearchBar = () => {
         console.error(e);
       }
     },
-    refetchOnMount: false,
+    refetchOnMount: true,
     refetchOnWindowFocus: false,
-    refetchInterval: 100000,
+    refetchInterval: 1000,
   })
   useEffect(() => {
     cities.refetch()
