@@ -54,7 +54,7 @@ const CitySearchBar = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder={cities.isLoading ? "Cities loading..." : "Search city..."}
-          className='searchBar__input w-full h-full text-[1rem] px-2 py-1'
+          className='searchBar__input w-full h-full text-[1rem] px-3 py-2'
         />
         {(cities.isLoading || cities.isRefetching)
           ? <LoadingSpinner />
