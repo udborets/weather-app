@@ -10,6 +10,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { City } from '@/models/city';
 import { useChosenCity } from '@/store/useChosenCity';
 import { getWeatherLink } from '@/services/weather';
+import { WeatherRequest } from '@/models/weather';
 
 const CitySearchBar = () => {
   const [search, setSearch] = useState<string>('');
@@ -70,7 +71,7 @@ const CitySearchBar = () => {
                 setSearch('');
                 const weatherLink = getWeatherLink({ lat: city.coord.lat, lon: city.coord.lon });
                 if (!weatherLink) return;
-                console.log(await axios.get(weatherLink));
+                console.log((await axios.get<WeatherRequest>(weatherLink)).data);
               }} />
             ))
             : <CitySearchBarItem noResultText='No results' onClick={() => {
