@@ -4,10 +4,10 @@ import { useChosenCity } from "@/store/useChosenCity";
 interface ICitySearchBarItemProps {
   city?: City;
   noResultText?: string;
-  hideSearchResultsFn: () => void;
+  onClick: () => void;
 }
 
-const CitySearchBarItem = ({ city, hideSearchResultsFn, noResultText }: ICitySearchBarItemProps) => {
+const CitySearchBarItem = ({ city, onClick, noResultText }: ICitySearchBarItemProps) => {
   const setChosenCity = useChosenCity((store: any) => store.setChosenCity);
   return (
     <div className="searchBarResult px-3 py-2 border-b-2 rounded-[10px] transition-colors duration-200 text-black 
@@ -16,7 +16,7 @@ const CitySearchBarItem = ({ city, hideSearchResultsFn, noResultText }: ICitySea
         if (city) {
           setChosenCity(city);
         }
-        hideSearchResultsFn();
+        onClick();
       }}
     >
       <div className="searchBarResult__container gap-3 flex justify-start relative">
@@ -24,9 +24,9 @@ const CitySearchBarItem = ({ city, hideSearchResultsFn, noResultText }: ICitySea
           {noResultText
             ? <span>{noResultText}</span>
             : ''}
-          {city ? city.name.length <= 30
+          {city ? city.name.length <= 28
             ? city.name
-            : <span>{city.name.slice(0, 30)}...</span>
+            : <span>{city.name.slice(0, 28)}...</span>
             : ''}
         </span>
         <span className='absolute top-[0px] right-0'>
