@@ -9,6 +9,7 @@ import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 import { useDebounce } from '@/hooks/useDebounce';
 import { City } from '@/models/city';
 import { useChosenCity } from '@/store/useChosenCity';
+import { getWeatherLink } from '@/services/weather';
 
 const CitySearchBar = () => {
   const [search, setSearch] = useState<string>('');
@@ -61,13 +62,15 @@ const CitySearchBar = () => {
           : <></>}
       </div>
       {isShowingSearchResults
-        ?
-        <div className="searchBar__results absolute flex flex-col gap-2 border-2 border-gray-500 my-1 rounded-[10px] p-2 w-[300px]">
+        ? <div className="searchBar__results absolute flex flex-col gap-2 border-2 border-gray-500 my-1 rounded-[10px] p-2 w-[300px]">
           {(cities.data && cities.data.length !== 0)
             ? cities.data.slice(0, 6).map((city) => (
-              <CitySearchBarItem city={city} key={city.id} onClick={() => {
+              <CitySearchBarItem city={city} key={city.id} onClick={async () => {
                 setIsShowingSearchResults(false);
                 setSearch('');
+                const weatherLink = getWeatherLink({ lat: city.coord.lat, lon: city.coord.lon });
+                if (!weatherLink) return;
+                console.log(await axios.get(weatherLink));
               }} />
             ))
             : <CitySearchBarItem noResultText='No results' onClick={() => {
