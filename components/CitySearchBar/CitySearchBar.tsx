@@ -39,9 +39,9 @@ const CitySearchBar = () => {
         console.error(e);
       }
     },
+    queryKey: [debouncedSearch.toLowerCase()],
     refetchOnMount: true,
     refetchOnWindowFocus: false,
-    refetchInterval: 1000,
   })
   useEffect(() => {
     cities.refetch()
