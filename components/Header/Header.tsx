@@ -7,7 +7,7 @@ import { ubuntuBold } from "@/fonts/ubuntu";
 
 const Header = () => {
   return (
-    <header className="header h-[80px] p-4 w-full min-w-full flex justify-center">
+    <header className="header h-fit p-4 w-full min-w-full flex justify-center">
       <div className="header__container flex w-4/5 h-full min-h-full justify-around gap-4 flex-wrap">
         <div className="header__left flex">
           <Link href="/" className="header__title w-fit h-fit self-center ">
