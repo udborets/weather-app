@@ -1,13 +1,11 @@
 'use client'
 
-import { City } from "@/models/city";
-import { useChosenCity } from "@/store/useChosenCity";
+import WeatherInfoBar from "@/components/WeatherInfoBar/WeatherInfoBar";
 
 export default function Home() {
-  const chosenCity: City = useChosenCity((store: any) => store?.chosenCity);
   return (
     <div className="w-full h-full flex flex-col">
-      {chosenCity.name}
+      <WeatherInfoBar />
     </div>
   )
 }
