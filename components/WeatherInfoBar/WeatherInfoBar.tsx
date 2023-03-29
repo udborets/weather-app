@@ -13,6 +13,7 @@ const WeatherInfoBar = () => {
       const weatherLink = getWeatherLink(chosenCity.coord);
       if (!weatherLink) return null;
       const fetchedWeather = (await axios.get<WeatherRequest>(weatherLink));
+      console.log(fetchedWeather.data)
       return fetchedWeather.data;
     },
     queryKey: [chosenCity.id],
@@ -21,9 +22,15 @@ const WeatherInfoBar = () => {
     }
   })
   return (
-    <div>
-      <div>Temperature: {weather.data?.list[0].main.temp}</div>
-      <div>Feels like: {weather.data?.list[0].main.feels_like}</div>
+    <div className="weatherInfoBar p-4 rounded-[20px] bg-slate-400 w-fit h-fit">
+      <div className="weatherInfoBar__container flex flex-col gap-4">
+        <h4>{weather.data?.city.name}</h4>
+        <ul className='flex flex-col gap-1'>
+          <li>Temperature: {weather.data?.list[0].main.temp}</li>
+          <li>Feels like: {weather.data?.list[0].main.feels_like}</li>
+          <li>{weather.data?.list[4].weather[0].description}</li>
+        </ul>
+      </div>
     </div>
   )
 }
