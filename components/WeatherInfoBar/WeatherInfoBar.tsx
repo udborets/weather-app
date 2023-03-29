@@ -11,10 +11,7 @@ const WeatherInfoBar = () => {
   const weather = useQuery({
     queryFn: async () => {
       const weatherLink = getWeatherLink(chosenCity.coord);
-      if (!weatherLink) {
-        console.error()
-        return null
-      };
+      if (!weatherLink) return null;
       const fetchedWeather = (await axios.get<WeatherRequest>(weatherLink));
       return fetchedWeather.data;
     },
