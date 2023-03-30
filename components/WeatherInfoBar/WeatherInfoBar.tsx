@@ -35,7 +35,7 @@ const WeatherInfoBar = () => {
             >
               {weather.data?.city.name}
             </h4>
-            <div className='flex flex-col'>
+            <div className='weatherInfoBar__content flex flex-col'>
               <ul className="weatherInfoBar__daySelectList flex">
                 <DaySelectButton
                   isSelected={dayShowing === 0}
@@ -56,7 +56,7 @@ const WeatherInfoBar = () => {
                   DAT, {weather.data?.list[15].dt_txt.split(" ")[0] ?? ""}
                 </DaySelectButton>
               </ul>
-              <ul className='flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
+              <ul className='weatherInfoBar__weatherInfo flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
                 <li>Temperature: {weather.data?.list[dayShowing].main.temp}&#8451;</li>
                 <li>Feels like: {weather.data?.list[dayShowing].main.feels_like}&#8451;</li>
                 <li>{weather.data?.list[dayShowing].weather[0].description}</li>
