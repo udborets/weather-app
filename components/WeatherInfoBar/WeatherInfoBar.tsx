@@ -5,7 +5,7 @@ import { City } from "@/models/city";
 import { WeatherRequest } from "@/models/weather";
 import { getWeatherLink } from "@/services/weather";
 import { useChosenCity } from "@/store/useChosenCity";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
 
 const WeatherInfoBar = () => {
@@ -24,6 +24,9 @@ const WeatherInfoBar = () => {
       console.warn(e)
     }
   })
+  useEffect(() => {
+    setDayShowing(0);
+  }, [chosenCity.id])
   return (
     <div className="weatherInfoBar p-4 rounded-[20px] bg-slate-300 w-[700px] h-[300px] shadow-2xl">
       <div className="weatherInfoBar__container w-full h-full flex flex-col gap-4 items-center justify-center relative">
