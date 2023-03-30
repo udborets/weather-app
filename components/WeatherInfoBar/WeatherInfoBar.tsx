@@ -6,6 +6,7 @@ import { WeatherRequest } from "@/models/weather";
 import { getWeatherLink } from "@/services/weather";
 import { useChosenCity } from "@/store/useChosenCity";
 import { useState } from "react";
+import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
 
 const WeatherInfoBar = () => {
   const chosenCity: City = useChosenCity((store: any) => store?.chosenCity);
@@ -24,31 +25,43 @@ const WeatherInfoBar = () => {
     }
   })
   return (
-    <div className="weatherInfoBar p-4 rounded-[20px] bg-slate-300 w-[200px] h-[300px] shadow-2xl">
+    <div className="weatherInfoBar p-4 rounded-[20px] bg-slate-300 w-[400px] h-[300px] shadow-2xl">
       <div className="weatherInfoBar__container w-full h-full flex flex-col gap-4 items-center justify-center relative">
         {weather.isLoading
           ? <span>Loading...</span>
           : <>
-            <h4 className='font-bold text-[1.1rem] absolute top-[10px]'>{weather.data?.city.name}</h4>
-            <ul>
-              <li className="flex gap-1">
-                <span>today</span>
-                <input type="radio" value="today" onChange={() => setDayShowing(0)} checked={dayShowing === 0} />
-              </li>
-              <li className="flex gap-1">
-                <span>tomorrow</span>
-                <input type="radio" value="today" onChange={() => setDayShowing(1)} checked={dayShowing === 1} />
-              </li>
-              <li className="flex gap-1">
-                <span>day after tomorrow</span>
-                <input type="radio" value="today" onChange={() => setDayShowing(2)} checked={dayShowing === 2} />
-              </li>
-            </ul>
-            <ul className='flex flex-col gap-1'>
-              <li>Temperature: {weather.data?.list[dayShowing].main.temp}</li>
-              <li>Feels like: {weather.data?.list[dayShowing].main.feels_like}</li>
-              <li>{weather.data?.list[dayShowing].weather[0].description}</li>
-            </ul>
+            <h4
+              className='weatherInfoBar__cityName font-bold text-[1.1rem] absolute top-[10px]'
+            >
+              {weather.data?.city.name}
+            </h4>
+            <div className='flex flex-col'>
+              <ul className="weatherInfoBar__daySelectList flex">
+                <DaySelectButton
+                  isSelected={dayShowing === 0}
+                  onClick={() => setDayShowing(0)}
+                >
+                  Today
+                </DaySelectButton>
+                <DaySelectButton
+                  isSelected={dayShowing === 1}
+                  onClick={() => setDayShowing(1)}
+                >
+                  Tomorrow
+                </DaySelectButton>
+                <DaySelectButton
+                  isSelected={dayShowing === 2}
+                  onClick={() => setDayShowing(2)}
+                >
+                  DAT
+                </DaySelectButton>
+              </ul>
+              <ul className='flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
+                <li>Temperature: {weather.data?.list[dayShowing].main.temp}</li>
+                <li>Feels like: {weather.data?.list[dayShowing].main.feels_like}</li>
+                <li>{weather.data?.list[dayShowing].weather[0].description}</li>
+              </ul>
+            </div>
           </>}
       </div>
     </div>
