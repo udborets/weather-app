@@ -1,12 +1,12 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
+import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
 import { City } from "@/models/city";
 import { WeatherRequest } from "@/models/weather";
 import { getWeatherLink } from "@/services/weather";
 import { useChosenCity } from "@/store/useChosenCity";
-import { useEffect, useState } from "react";
-import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
 
 const WeatherInfoBar = () => {
   const chosenCity: City = useChosenCity((store: any) => store?.chosenCity);
@@ -21,7 +21,7 @@ const WeatherInfoBar = () => {
     },
     queryKey: [chosenCity.id],
     onError: (e) => {
-      console.warn(e)
+      console.warn(e);
     }
   })
   useEffect(() => {
@@ -31,7 +31,7 @@ const WeatherInfoBar = () => {
     <div className="weatherInfoBar p-4 rounded-[20px] bg-slate-300 w-[700px] h-[300px] shadow-2xl">
       <div className="weatherInfoBar__container w-full h-full flex flex-col gap-4 items-center justify-center relative">
         {weather.isLoading
-          ? <span>Loading...</span>
+          ? <span className="weatherInfoBar__loading font-bold text-[2rem]">Loading...</span>
           : <>
             <h4
               className='weatherInfoBar__cityName font-bold text-[1.1rem] absolute top-[10px]'
