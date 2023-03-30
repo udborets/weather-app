@@ -10,7 +10,7 @@ import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
 
 const WeatherInfoBar = () => {
   const chosenCity: City = useChosenCity((store: any) => store?.chosenCity);
-  const [dayShowing, setDayShowing] = useState<0 | 1 | 2>(0);
+  const [dayShowing, setDayShowing] = useState<0 | 6 | 15>(0);
   const weather = useQuery({
     queryFn: async () => {
       const weatherLink = getWeatherLink(chosenCity.coord);
@@ -41,19 +41,19 @@ const WeatherInfoBar = () => {
                   isSelected={dayShowing === 0}
                   onClick={() => setDayShowing(0)}
                 >
-                  Today
+                  Today, {weather.data?.list[0].dt_txt.split(" ")[0] ?? ""}
                 </DaySelectButton>
                 <DaySelectButton
-                  isSelected={dayShowing === 1}
-                  onClick={() => setDayShowing(1)}
+                  isSelected={dayShowing === 6}
+                  onClick={() => setDayShowing(6)}
                 >
-                  Tomorrow
+                  Tomorrow, {weather.data?.list[6].dt_txt.split(" ")[0] ?? ""}
                 </DaySelectButton>
                 <DaySelectButton
-                  isSelected={dayShowing === 2}
-                  onClick={() => setDayShowing(2)}
+                  isSelected={dayShowing === 15}
+                  onClick={() => setDayShowing(15)}
                 >
-                  DAT
+                  DAT, {weather.data?.list[15].dt_txt.split(" ")[0] ?? ""}
                 </DaySelectButton>
               </ul>
               <ul className='flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
