@@ -20,11 +20,11 @@
 
 ## Todo :clipboard:
 
-- ## make better weather info displaying
+- **make better weather info displaying**
 
-- ## show weather gifs according to weather info
+- **show weather gifs according to weather info**
 
-- ## surely something else 🙃
+- **surely something else 🙃**
 
 <a id="feedbacklink"></a>
 
