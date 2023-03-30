@@ -1,5 +1,5 @@
 type DaySelectButtonProps = {
-  children: string;
+  children: string | string[];
   onClick: (attr?: any) => any;
   isSelected: boolean;
 }
