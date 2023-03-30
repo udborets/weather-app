@@ -20,16 +20,14 @@ const CitySearchBarItem = ({ city, onClick, noResultText }: ICitySearchBarItemPr
       }}
     >
       <div className="searchBarResult__container gap-3 flex justify-start relative">
-        <span>
-          {noResultText
-            ? <span>{noResultText}</span>
-            : ''}
-          {city ? city.name.length <= 28
-            ? city.name
-            : <span>{city.name.slice(0, 28)}...</span>
-            : ''}
-        </span>
-        <span className='absolute top-[0px] right-0 opacity-40 font-bold'>
+        {noResultText
+          ? <span className="searchBarResult__noResultText">{noResultText}</span>
+          : ''}
+        {city ? city.name.length <= 28
+          ? city.name
+          : <span className="searchBarResult__cityName">{city.name.slice(0, 28)}...</span>
+          : ''}
+        <span className='searchBarResult__country absolute top-[0px] right-0 opacity-40 font-bold'>
           {city ? city.country : ''}
         </span>
       </div>
