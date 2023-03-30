@@ -57,8 +57,8 @@ const WeatherInfoBar = () => {
                 </DaySelectButton>
               </ul>
               <ul className='flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
-                <li>Temperature: {weather.data?.list[dayShowing].main.temp}</li>
-                <li>Feels like: {weather.data?.list[dayShowing].main.feels_like}</li>
+                <li>Temperature: {weather.data?.list[dayShowing].main.temp}&#8451;</li>
+                <li>Feels like: {weather.data?.list[dayShowing].main.feels_like}&#8451;</li>
                 <li>{weather.data?.list[dayShowing].weather[0].description}</li>
               </ul>
             </div>
