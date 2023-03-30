@@ -44,30 +44,21 @@ const WeatherInfoBar = () => {
                   <DaySelectButton
                     isSelected={dayShowing === 0}
                     onClick={() => setDayShowing(0)}
-                  >
-                    <div className="flex flex-col">
-                      <span>Today,</span>
-                      <span>{weather.data?.list[0].dt_txt.split(" ")[0] ?? ""}</span>
-                    </div>
-                  </DaySelectButton>
+                    date={weather.data?.list[0].dt_txt.split(' ')[0] ?? ""}
+                    text={"Today"}
+                  />
                   <DaySelectButton
                     isSelected={dayShowing === 6}
                     onClick={() => setDayShowing(6)}
-                  >
-                    <div className="flex flex-col">
-                      <span>Tomorrow,</span>
-                      <span>{weather.data?.list[7].dt_txt.split(" ")[0] ?? ""}</span>
-                    </div>
-                  </DaySelectButton>
+                    date={weather.data?.list[6].dt_txt.split(' ')[0] ?? ""}
+                    text={"Tomorrow"}
+                  />
                   <DaySelectButton
                     isSelected={dayShowing === 15}
                     onClick={() => setDayShowing(15)}
-                  >
-                    <div className="flex flex-col">
-                      <span>DAT,</span>
-                      <span>{weather.data?.list[15].dt_txt.split(" ")[0] ?? ""}</span>
-                    </div>
-                  </DaySelectButton>
+                    date={weather.data?.list[15].dt_txt.split(' ')[0] ?? ""}
+                    text={"DAT"}
+                  />
                 </ul>
                 <ul className='weatherInfo__info flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
                   <li>Temperature: {weather.data?.list[dayShowing].main.temp}&#8451;</li>
