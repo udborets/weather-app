@@ -36,16 +36,34 @@ const WeatherInfoBar = () => {
               {weather.data?.city.name}
             </h4>
             <div className='weatherInfoBar__content flex w-full h-full justify-center items-center'>
-              <div className="weatherInfo flex flex-col w-2/3">
-                <ul className="weatherInfo__daySelectList flex">
-                  <DaySelectButton isSelected={dayShowing === 0} onClick={() => setDayShowing(0)} >
-                    Today, {weather.data?.list[0].dt_txt.split(" ")[0] ?? ""}
+              <div className="weatherInfo flex flex-col w-fit">
+                <ul className="weatherInfo__daySelectList flex w-fit">
+                  <DaySelectButton
+                    isSelected={dayShowing === 0}
+                    onClick={() => setDayShowing(0)}
+                  >
+                    <div className="flex flex-col">
+                      <span>Today,</span>
+                      <span>{weather.data?.list[0].dt_txt.split(" ")[0] ?? ""}</span>
+                    </div>
                   </DaySelectButton>
-                  <DaySelectButton isSelected={dayShowing === 6} onClick={() => setDayShowing(6)} >
-                    Tomorrow, {weather.data?.list[6].dt_txt.split(" ")[0] ?? ""}
+                  <DaySelectButton
+                    isSelected={dayShowing === 6}
+                    onClick={() => setDayShowing(6)}
+                  >
+                    <div className="flex flex-col">
+                      <span>Tomorrow,</span>
+                      <span>{weather.data?.list[7].dt_txt.split(" ")[0] ?? ""}</span>
+                    </div>
                   </DaySelectButton>
-                  <DaySelectButton isSelected={dayShowing === 15} onClick={() => setDayShowing(15)} >
-                    DAT, {weather.data?.list[15].dt_txt.split(" ")[0] ?? ""}
+                  <DaySelectButton
+                    isSelected={dayShowing === 15}
+                    onClick={() => setDayShowing(15)}
+                  >
+                    <div className="flex flex-col">
+                      <span>DAT,</span>
+                      <span>{weather.data?.list[15].dt_txt.split(" ")[0] ?? ""}</span>
+                    </div>
                   </DaySelectButton>
                 </ul>
                 <ul className='weatherInfo__info flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
