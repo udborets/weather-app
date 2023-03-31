@@ -1,22 +1,12 @@
 import { City } from "@/models/city";
 import { useChosenCity } from "@/store/useChosenCity";
 
-import { useChosenCity } from "@/store/useChosenCity";
-
 interface ICitySearchBarItemProps {
   city?: City;
   noResultText?: string;
   onClick: () => void;
 }
 
-<<<<<<< HEAD
-const CitySearchBarItem = ({ city }: ICitySearchBarItemProps) => {
-  const setChosenCity = useChosenCity((store: any) => store.setChosenCity);
-  return (
-    <div
-      className="searchBarResult px-3 py-2 border-b-2 last-of-type:border-b-0 text-black bg-white hover:text-white hover:bg-sky w-[300px]"
-      onClick={() => setChosenCity(city)}
-=======
 const CitySearchBarItem = ({ city, onClick, noResultText }: ICitySearchBarItemProps) => {
   const setChosenCity = useChosenCity((store: any) => store.setChosenCity);
   return (
@@ -28,7 +18,6 @@ const CitySearchBarItem = ({ city, onClick, noResultText }: ICitySearchBarItemPr
         }
         onClick();
       }}
->>>>>>> f0d8030629a3f835cdca5a4faa6c1cd9404f1f04
     >
       <div className="searchBarResult__container gap-3 flex justify-start relative">
         {noResultText
