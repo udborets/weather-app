@@ -12,24 +12,34 @@ import { City } from '@/models/city';
 const CitySearchBar = () => {
   const [search, setSearch] = useState<string>('');
   const debouncedSearch = useDebounce(search, 500);
+  const [isShowingSearchResults, setIsShowingSearchResults] = useState<boolean>(false);
   const cities = useQuery({
     queryFn: async () => {
-      if (!debouncedSearch) return [];
+      if (!debouncedSearch) {
+        setIsShowingSearchResults(false);
+        return [];
+      }
       try {
         const fetchedCities = await axios.get<City[]>(`/api/cities/${debouncedSearch}`);
         if (fetchedCities.status !== 200) {
           console.error(fetchedCities);
           return [];
         }
-        return fetchedCities.data;
+        setIsShowingSearchResults(true);
+        const cityNames: string[] = [];
+        return fetchedCities.data.filter((city) => {
+          if (cityNames.includes(city.name)) return false;
+          cityNames.push(city.name);
+          return true;
+        })
       }
       catch (e: unknown) {
         console.error(e);
       }
     },
-    refetchOnMount: false,
+    queryKey: [debouncedSearch.toLowerCase()],
+    refetchOnMount: true,
     refetchOnWindowFocus: false,
-    refetchInterval: 100000,
   })
   useEffect(() => {
     cities.refetch()
@@ -41,21 +51,28 @@ const CitySearchBar = () => {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder={cities.isLoading ? "Cities loading..." : "Search..."}
-          className='searchBar__input w-full h-full text-[1rem] px-2 py-1'
-          disabled={cities.isLoading || cities.isRefetching}
+          placeholder={cities.isLoading ? "Cities loading..." : "Search city..."}
+          className='searchBar__input w-full h-full text-[1rem] px-3 py-2'
         />
         {(cities.isLoading || cities.isRefetching)
           ? <LoadingSpinner />
           : <></>}
       </div>
-      <div className="searchBar__results absolute">
-        {Array.isArray(cities.data)
-          ? cities.data.slice(0, 6).map((city) => (
-            <CitySearchBarItem city={city} key={city.id} />
-          ))
-          : <></>}
-      </div>
+      {isShowingSearchResults
+        ? <div className="searchBar__results absolute z-[2] flex flex-col gap-2 border-2 border-gray-500 my-1 rounded-[10px] p-2 w-[300px] bg-white">
+          {(cities.data && cities.data.length !== 0)
+            ? cities.data.slice(0, 6).map((city) => (
+              <CitySearchBarItem city={city} key={city.id} onClick={() => {
+                setIsShowingSearchResults(false);
+                setSearch('');
+              }} />
+            ))
+            : <CitySearchBarItem noResultText='No results' onClick={() => {
+              setIsShowingSearchResults(false);
+              setSearch('');
+            }} />}
+        </div>
+        : <></>}
     </div>
   )
 }
