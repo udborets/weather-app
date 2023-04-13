@@ -46,7 +46,7 @@ const CitySearchBar = () => {
   }, [debouncedSearch])
   return (
     <div className="searchBar">
-      <div className='searchBar__bar flex justify-between w-[300px] border-2 relative'>
+      <div className='searchBar__bar flex justify-between w-full max-w-[300px] border-2 relative'>
         <input
           type="text"
           value={search}
