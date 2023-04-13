@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
-import { City } from "@/models/city";
 import { WeatherRequest } from "@/models/weather";
 import { getWeatherLink } from "@/services/weather";
 import { useChosenCity } from "@/store/useChosenCity";
 
 const WeatherInfoBar = () => {
-  const chosenCity: City = useChosenCity((store: any) => store?.chosenCity);
+  const { chosenCity } = useChosenCity();
   const [dayShowing, setDayShowing] = useState<0 | 6 | 15>(0);
   const weather = useQuery({
     queryFn: async () => {
@@ -40,23 +39,23 @@ const WeatherInfoBar = () => {
             </h4>
             <div className='weatherInfoBar__content flex w-full h-full justify-center items-center'>
               <div className="weatherInfo flex flex-col w-fit">
-                <ul className="weatherInfo__daySelectList flex w-fit">
+                <ul className="weatherInfo__daySelectList flex w-fit h-fit">
                   <DaySelectButton
                     isSelected={dayShowing === 0}
                     onClick={() => setDayShowing(0)}
-                    date={weather.data?.list[0].dt_txt.split(' ')[0] ?? ""}
+                    date={weather.data?.list[0].dt_txt.split(' ')[0].slice(5) ?? ""}
                     text={"Today"}
                   />
                   <DaySelectButton
                     isSelected={dayShowing === 6}
                     onClick={() => setDayShowing(6)}
-                    date={weather.data?.list[6].dt_txt.split(' ')[0] ?? ""}
+                    date={weather.data?.list[6].dt_txt.split(' ')[0].slice(5) ?? ""}
                     text={"Tomorrow"}
                   />
                   <DaySelectButton
                     isSelected={dayShowing === 15}
                     onClick={() => setDayShowing(15)}
-                    date={weather.data?.list[15].dt_txt.split(' ')[0] ?? ""}
+                    date={weather.data?.list[15].dt_txt.split(' ')[0].slice(5) ?? ""}
                     text={"DAT"}
                   />
                 </ul>
