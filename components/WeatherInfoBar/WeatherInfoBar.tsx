@@ -28,7 +28,7 @@ const WeatherInfoBar = () => {
     setDayShowing(0);
   }, [chosenCity.id])
   return (
-    <div className="weatherInfoBar p-4 rounded-[20px] bg-slate-300 w-[700px] h-[300px] shadow-2xl">
+    <div className="weatherInfoBar p-4 rounded-[20px] bg-slate-300 w-full h-[300px] shadow-2xl">
       <div className="weatherInfoBar__container w-full h-full flex flex-col gap-4 items-center justify-center relative">
         {weather.isLoading
           ? <span className="weatherInfoBar__loading font-bold text-[2rem]">Loading...</span>
