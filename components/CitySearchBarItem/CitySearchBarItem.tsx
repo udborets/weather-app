@@ -11,7 +11,7 @@ const CitySearchBarItem = ({ city, onClick, noResultText }: ICitySearchBarItemPr
   const { setChosenCity } = useChosenCity();
   return (
     <div className="searchBarResult px-3 py-2 border-b-2 rounded-[10px] transition-colors duration-200 text-black 
-    bg-white hover:text-white hover:bg-sky w-full"
+    bg-white hover:text-white hover:bg-[var(--sky-color)] w-full"
       onClick={() => {
         if (city) {
           setChosenCity(city);
