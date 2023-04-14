@@ -1,8 +1,8 @@
-import style from "./WeatherInforBar.module.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
+import style from "./WeatherInfoBar.module.scss";
 import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
 import { WeatherRequest } from "@/models/weather";
 import { getWeatherLink } from "@/services/weather";
