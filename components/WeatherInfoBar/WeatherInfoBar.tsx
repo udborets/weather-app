@@ -1,3 +1,4 @@
+import style from "./WeatherInforBar.module.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -27,7 +28,7 @@ const WeatherInfoBar = () => {
     setDayShowing(0);
   }, [chosenCity.id])
   return (
-    <div className="weatherInfoBar p-4 rounded-[20px] bg-slate-300 w-full h-[300px] shadow-2xl">
+    <div className={`weatherInfoBar p-4 rounded-[20px] bg-gradient-to-br from-slate-200 to-slate-300 w-full h-[300px] shadow-2xl ${style.sun}`}>
       <div className="weatherInfoBar__container w-full h-full flex flex-col gap-4 items-center justify-center relative">
         {weather.isLoading
           ? <span className="weatherInfoBar__loading font-bold text-[2rem]">Loading...</span>
