@@ -12,12 +12,12 @@
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid #000000;
+  border: 5px solid var(--sky-color);
   animation: prixClipFix 2s linear infinite;
 }
 
 .loader::after {
-  border-color: #ff3d00;
+  border-color: black;
   animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
   inset: 6px;
 }
