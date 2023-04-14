@@ -22,6 +22,8 @@
 
 - **make better weather info displaying**
 
+- **add weather api info type (cloudy/rainy/sunny)**
+
 - **show weather gifs according to weather info**
 
 - **surely something else 🙃**
