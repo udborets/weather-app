@@ -18,7 +18,7 @@ export type WeatherRequest = {
   list: WeatherListElement[];
 };
 
-type WeatherListElement = {
+export type WeatherListElement = {
   clouds: {
     all: number;
   };
