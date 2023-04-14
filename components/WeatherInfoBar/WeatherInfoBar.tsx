@@ -11,13 +11,31 @@ import { useChosenCity } from "@/store/useChosenCity";
 const WeatherInfoBar = () => {
   const chosenCity: City = useChosenCity((store: any) => store?.chosenCity);
   const [dayShowing, setDayShowing] = useState<0 | 6 | 15>(0);
+  const fiveDaysInfo = new Map<string, any[]>();
   const weather = useQuery({
     queryFn: async () => {
       const weatherLink = getWeatherLink(chosenCity.coord);
       if (!weatherLink) return null;
-      const fetchedWeather = (await axios.get<WeatherRequest>(weatherLink));
-      console.log(fetchedWeather.data)
-      return fetchedWeather.data;
+      const { data: fetchedWeather } = (await axios.get<WeatherRequest>(weatherLink));
+      console.log(fetchedWeather)
+      if (fetchedWeather.city.id !== chosenCity.id) {
+        const fiveDaysInfoKeys = [...fiveDaysInfo.keys()]
+        fiveDaysInfoKeys.map((key) => {
+          fiveDaysInfo.set(key, []);
+        })
+      }
+      fetchedWeather.list.forEach((listInfoItem) => {
+        const listInfoItemDay = listInfoItem.dt_txt.split(' ')[0];
+        const mapDayWeather = fiveDaysInfo.get(listInfoItemDay);
+        if (!mapDayWeather?.length) {
+          fiveDaysInfo.set(listInfoItemDay, [listInfoItem]);
+        }
+        if (mapDayWeather?.length) {
+          mapDayWeather.push(listInfoItem);
+        }
+      })
+      console.log(fiveDaysInfo);
+      return fetchedWeather;
     },
     queryKey: [chosenCity.id],
     onError: (e) => {
