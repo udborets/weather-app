@@ -1,8 +1,13 @@
 import styles from './LoadingSpinner.module.scss';
 
-const LoadingSpinner = () => {
+interface LoadingSpinnerProps {
+  width?: string;
+  height?: string;
+}
+
+const LoadingSpinner = ({ width, height }: LoadingSpinnerProps) => {
   return (
-    <div className={styles.loadingRing}><div></div><div></div><div></div><div></div></div>
+    <div className={`${width ?? "w-[48px]"} ${height ?? "h-[48px]"} ${styles.loader}`}></div>
   )
 }
 

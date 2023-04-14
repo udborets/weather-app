@@ -15,7 +15,7 @@ export const NavbarLink = ({ href, children: text }: INavbarLinkProps) => {
   const isCurrentPage = path === href;
   return (
     <li className='navbarLink w-fit h-fit'>
-      <Link href={href} className={`navbarLink__link p-1 ${isCurrentPage ? "text-sky" : "text-black"} text-[1.17rem] hover:text-sky transition-all duration-500 ease-out ${ubuntuBold.className}`}>
+      <Link href={href} className={`navbarLink__link p-1 ${isCurrentPage ? "text-[var(--sky-color)]" : "text-black"} text-[1.17rem] hover:text-[var(--sky-color)] transition-all duration-500 ease-out ${ubuntuBold.className}`}>
         {text}
       </Link>
     </li>

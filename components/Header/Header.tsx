@@ -12,7 +12,7 @@ const Header = () => {
         <div className="header__left flex">
           <Link href="/" className="header__title w-fit h-fit self-center ">
             <h2 className="title__text w-fit h-fit">
-              <span className={`title__blue text-[1.7rem] text-sky ${ubuntuBold.className}`}>
+              <span className={`title__blue text-[1.7rem] text-[var(--sky-color)] ${ubuntuBold.className}`}>
                 My
               </span>
               <span className={`title-black text-[1.7rem] text-black ${ubuntuBold.className}`}>

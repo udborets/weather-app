@@ -30,7 +30,7 @@
 
 ## Feedback :pray:
 
-**If you have any suggestions or you found a bug in the code, please contact me 🙏:**
+**If you have any suggestions or you found a bug in the code, please contact me:**
 
 - **telegram:** [@udborets](https://t.me/udborets)
 

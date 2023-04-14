@@ -2,12 +2,12 @@ import { create } from "zustand";
 
 import { City } from "@/models/city";
 
-export type Store = {
+export interface ChosenCityState {
   chosenCity: City;
-  setChosenCity: () => (newCity: City) => void;
-};
+  setChosenCity: (newCity: City) => void;
+}
 
-export const useChosenCity = create((set) => ({
+export const useChosenCity = create<ChosenCityState>((set) => ({
   chosenCity: {
     coord: {
       lat: 0,
