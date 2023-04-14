@@ -1,0 +1,21 @@
+.sun {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.sun::after {
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  background: radial-gradient(
+    90px circle at center -5%,
+    rgba(240, 255, 115, 1) 25%,
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+}
