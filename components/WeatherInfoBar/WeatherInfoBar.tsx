@@ -2,16 +2,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
-import style from "./WeatherInfoBar.module.scss";
 import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
-import { WeatherRequest } from "@/models/weather";
+import DayWeatherInfo from "@/components/DayWeatherInfo/DayWeatherInfo";
+import { WeatherListElement, WeatherRequest } from "@/models/weather";
 import { getWeatherLink } from "@/services/weather";
 import { useChosenCity } from "@/store/useChosenCity";
+import style from "./WeatherInfoBar.module.scss";
 
 const WeatherInfoBar = () => {
   const { chosenCity } = useChosenCity();
-  const [dayShowing, setDayShowing] = useState<0 | 6 | 15>(0);
-  const [fiveDaysInfo] = useState(new Map<string, any[]>());
+  const [dayShowing, setDayShowing] = useState<number>(0);
+  const [fiveDaysInfo] = useState(new Map<string, WeatherListElement[]>());
   const weather = useQuery({
     queryFn: async () => {
       const weatherLink = getWeatherLink(chosenCity.coord);
@@ -59,32 +60,30 @@ const WeatherInfoBar = () => {
             <div className='weatherInfoBar__content flex w-full h-full justify-center items-center'>
               <div className="weatherInfo flex flex-col w-fit">
                 <ul className="weatherInfo__daySelectList flex w-fit h-fit">
-                  <DaySelectButton
-                    isSelected={dayShowing === 0}
-                    onClick={() => setDayShowing(0)}
-                    date={weather.data?.list[0].dt_txt.split(' ')[0].slice(5) ?? ""}
-                    text={"Today"}
-                  />
-                  <DaySelectButton
-                    isSelected={dayShowing === 6}
-                    onClick={() => setDayShowing(6)}
-                    date={weather.data?.list[6].dt_txt.split(' ')[0].slice(5) ?? ""}
-                    text={"Tomorrow"}
-                  />
-                  <DaySelectButton
-                    isSelected={dayShowing === 15}
-                    onClick={() => setDayShowing(15)}
-                    date={weather.data?.list[15].dt_txt.split(' ')[0].slice(5) ?? ""}
-                    text={"DAT"}
-                  />
+                  {[...fiveDaysInfo.keys()].map((key, index) => {
+                    const mapDayWeather = fiveDaysInfo.get(key);
+                    if (mapDayWeather)
+                      return <DaySelectButton
+                        key={key}
+                        isSelected={dayShowing === index}
+                        onClick={() => setDayShowing(index)}
+                        date={mapDayWeather[0].dt_txt.split(' ')[0].slice(5) ?? ""}
+                        text={""}
+                      />
+                  })}
                 </ul>
-                <button onClick={() => { console.log(fiveDaysInfo) }}>
-                  haha
-                </button>
-                <ul className='weatherInfo__info flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
-                  <li>Temperature: {weather.data?.list[dayShowing].main.temp}&#8451;</li>
-                  <li>Feels like: {weather.data?.list[dayShowing].main.feels_like}&#8451;</li>
-                  <li>{weather.data?.list[dayShowing].weather[0].description}</li>
+                <ul className='weatherInfo__info flex flex-col gap-1 text-black bg-slate-600 p-4 rounded-b-xl'>
+                  {[...fiveDaysInfo.keys()].map((key, index) => {
+                    const mapDayWeather = fiveDaysInfo.get(key);
+                    if (mapDayWeather)
+                      return (
+                        <DayWeatherInfo
+                          weatherInfo={mapDayWeather}
+                          key={key}
+                          className={`${dayShowing === index ? 'opacity-100' : 'opacity-0'}`}
+                        />
+                      )
+                  })}
                 </ul>
               </div>
             </div>
