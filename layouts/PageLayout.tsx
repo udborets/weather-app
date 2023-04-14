@@ -3,7 +3,6 @@
 import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-import CitySearchBar from "@/components/CitySearchBar/CitySearchBar";
 import Header from "@/components/Header/Header";
 import styles from './PageLayout.module.scss';
 
