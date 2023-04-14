@@ -11,7 +11,7 @@ import { useChosenCity } from "@/store/useChosenCity";
 const WeatherInfoBar = () => {
   const { chosenCity } = useChosenCity();
   const [dayShowing, setDayShowing] = useState<0 | 6 | 15>(0);
-  const fiveDaysInfo = new Map<string, any[]>();
+  const [fiveDaysInfo] = useState(new Map<string, any[]>());
   const weather = useQuery({
     queryFn: async () => {
       const weatherLink = getWeatherLink(chosenCity.coord);
@@ -78,6 +78,9 @@ const WeatherInfoBar = () => {
                     text={"DAT"}
                   />
                 </ul>
+                <button onClick={() => { console.log(fiveDaysInfo) }}>
+                  haha
+                </button>
                 <ul className='weatherInfo__info flex flex-col gap-1 bg-slate-600 p-4 rounded-b-xl text-white'>
                   <li>Temperature: {weather.data?.list[dayShowing].main.temp}&#8451;</li>
                   <li>Feels like: {weather.data?.list[dayShowing].main.feels_like}&#8451;</li>
