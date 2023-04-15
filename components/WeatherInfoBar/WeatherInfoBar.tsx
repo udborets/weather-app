@@ -47,19 +47,19 @@ const WeatherInfoBar = () => {
     setDayShowing(0);
   }, [chosenCity.id])
   return (
-    <div className={`weatherInfoBar p-4 rounded-[20px] bg-gradient-to-br from-slate-200 to-slate-300 w-full h-[300px] shadow-2xl ${style.sun}`}>
+    <div className={`weatherInfoBar p-4 rounded-[20px] bg-gradient-to-br from-slate-200 to-slate-300 w-full h-fit w-fit shadow-2xl ${style.sun}`}>
       <div className="weatherInfoBar__container w-full h-full flex flex-col gap-4 items-center justify-center relative">
         {weather.isLoading
           ? <span className="weatherInfoBar__loading font-bold text-[2rem]">Loading...</span>
           : <>
             <h4
-              className='weatherInfoBar__cityName font-bold text-[1.1rem] absolute top-[10px]'
+              className='weatherInfoBar__cityName font-bold text-[1.1rem]'
             >
               {weather.data?.city.name}
             </h4>
             <div className='weatherInfoBar__content flex w-full h-full justify-center items-center'>
-              <div className="weatherInfo flex flex-col w-fit">
-                <ul className="weatherInfo__daySelectList flex w-fit h-fit">
+              <div className="weatherInfo flex flex-col w-full min-w-fit h-full">
+                <ul className="weatherInfo__daySelectList flex max-w-full w-fit h-fit">
                   {[...fiveDaysInfo.keys()].map((key, index) => {
                     const mapDayWeather = fiveDaysInfo.get(key);
                     if (mapDayWeather)
@@ -74,15 +74,18 @@ const WeatherInfoBar = () => {
                 </ul>
                 <ul className='weatherInfo__info flex flex-col gap-1 text-black bg-slate-600 p-4 rounded-b-xl'>
                   {[...fiveDaysInfo.keys()].map((key, index) => {
-                    const mapDayWeather = fiveDaysInfo.get(key);
-                    if (mapDayWeather)
-                      return (
-                        <DayWeatherInfo
-                          weatherInfo={mapDayWeather}
-                          key={key}
-                          className={`${dayShowing === index ? 'opacity-100' : 'opacity-0'}`}
-                        />
-                      )
+                    if (dayShowing === index) {
+                      const mapDayWeather = fiveDaysInfo.get(key);
+                      if (mapDayWeather)
+                        return (
+                          <DayWeatherInfo
+                            weatherInfo={mapDayWeather}
+                            key={key}
+                            className={``}
+                          />
+                        )
+                    }
+                    return <></>
                   })}
                 </ul>
               </div>
