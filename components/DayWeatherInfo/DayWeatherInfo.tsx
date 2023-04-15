@@ -6,9 +6,9 @@ interface DayWeatherInfoProps {
 }
 const DayWeatherInfo = ({ weatherInfo, className }: DayWeatherInfoProps) => {
   return (
-    <div className={className}>
+    <div className={"flex flex-col " + className}>
       {weatherInfo.map((timeInfo) => {
-        return (<span key={timeInfo.dt_txt}>{timeInfo.dt_txt}</span>)
+        return (<span key={timeInfo.dt_txt}>{timeInfo.clouds.all}</span>)
       })}
     </div>
   )
