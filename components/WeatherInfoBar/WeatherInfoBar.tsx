@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 import DaySelectButtonRow from "@/components/DaySelectButtonRow/DaySelectButtonRow";
@@ -7,7 +7,6 @@ import DayWeatherInfo from "@/components/DayWeatherInfo/DayWeatherInfo";
 import { WeatherListElement, WeatherRequest } from "@/models/weather";
 import { getWeatherLink } from "@/services/weather";
 import { useChosenCity } from "@/store/useChosenCity";
-import style from "./WeatherInfoBar.module.scss";
 
 const WeatherInfoBar = () => {
   const { chosenCity } = useChosenCity();
@@ -18,7 +17,6 @@ const WeatherInfoBar = () => {
       const weatherLink = getWeatherLink(chosenCity.coord);
       if (!weatherLink) return null;
       const { data: fetchedWeather } = (await axios.get<WeatherRequest>(weatherLink));
-      console.log(fetchedWeather)
       if (fetchedWeather.city.id !== chosenCity.id) {
         const fiveDaysInfoKeys = [...fiveDaysInfo.keys()]
         fiveDaysInfoKeys.map((key) => {
@@ -35,7 +33,6 @@ const WeatherInfoBar = () => {
           mapDayWeather.push(listInfoItem);
         }
       })
-      console.log(fiveDaysInfo);
       return fetchedWeather;
     },
     queryKey: [chosenCity.id],
@@ -62,8 +59,8 @@ const WeatherInfoBar = () => {
         {[...fiveDaysInfo.keys()].map((key, index) => {
           const dayInfo = fiveDaysInfo.get(key)
           if (dayInfo && index === dayShowing)
-            return <DayWeatherInfo weatherInfo={dayInfo} key={dayInfo[0].dt} />
-          return <></>
+            return <DayWeatherInfo weatherInfo={dayInfo} key={key} />
+          return <Fragment key={key}></Fragment>
         })}
       </div>
     </div>
