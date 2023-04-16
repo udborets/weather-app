@@ -20,12 +20,12 @@ const Header = () => {
               </span>
             </h2>
           </Link>
-          <div className="header__split w-[1px] h-1/2 bg-slate-300 self-center mx-6" />
+          {/* <div className="header__split w-[1px] h-1/2 bg-slate-300 self-center mx-6" />
           <Navbar>
             <NavbarLink href="/">
               Home
             </NavbarLink>
-          </Navbar>
+          </Navbar> */}
         </div>
         <div className="header__right self-center">
           <CitySearchBar />
