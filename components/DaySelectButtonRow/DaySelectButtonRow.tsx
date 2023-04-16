@@ -13,7 +13,7 @@ const DaySelectButtonRow = ({ fiveDaysInfo, dayShowing, setDayShowing }: DaySele
       <span className="weatherInfo__text font-bold text-[1.2rem]">
         Date:
       </span>
-      <ul className="weatherInfo__daySelectList flex max-w-full w-fit h-fit gap-4">
+      <ul className="weatherInfo__daySelectList flex flex-wrap flex-grow max-w-full w-fit h-fit gap-4">
         {[...fiveDaysInfo.keys()].map((key, index) => {
           const mapDayWeather = fiveDaysInfo.get(key);
           if (mapDayWeather)
