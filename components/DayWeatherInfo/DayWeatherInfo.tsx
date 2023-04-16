@@ -2,16 +2,15 @@ import { WeatherListElement } from "@/models/weather";
 
 interface DayWeatherInfoProps {
   weatherInfo: WeatherListElement[];
-  className?: string;
 }
-const DayWeatherInfo = ({ weatherInfo, className }: DayWeatherInfoProps) => {
+const DayWeatherInfo = ({ weatherInfo }: DayWeatherInfoProps) => {
   return (
-    <ul className={"dayWeatherInfo__list flex flex-col gap-8 " + className}>
+    <ul className={`dayWeatherInfo__list grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 lg:gap-6 w-full`}>
       {weatherInfo.map((timeInfo) => {
         return (
           <div
             key={timeInfo.dt}
-            className="dayWeatherInfo__item w-fit h-fit p-8 flex flex-col bg-white rounded-[15px] outline outline-1"
+            className="dayWeatherInfo__item w-fit h-fit px-4 py-2 md:px-8 md:py-4 flex flex-col bg-white rounded-[15px] outline outline-1"
           >
             <span className="font-bold">
               Time: {timeInfo.dt_txt.split(' ')[1]}
