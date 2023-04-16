@@ -5,9 +5,3 @@
 :root {
   --sky-color: #089cfc;
 }
-
-html,
-body {
-  @apply w-full min-h-full min-w-[400px] h-full flex flex-grow flex-col;
-}
-
