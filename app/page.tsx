@@ -4,8 +4,8 @@ import WeatherInfoBar from "@/components/WeatherInfoBar/WeatherInfoBar";
 
 export default function Home() {
   return (
-    <div className="homePage__content w-full h-full flex flex-col">
+    <main className="homePage w-full h-full flex flex-col flex-grow p-4 lg:p-20">
       <WeatherInfoBar />
-    </div>
+    </main>
   )
 }
