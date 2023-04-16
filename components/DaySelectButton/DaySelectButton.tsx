@@ -7,23 +7,19 @@ type DaySelectButtonProps = {
 
 const DaySelectButton = ({ text, date, onClick, isSelected }: DaySelectButtonProps) => {
   return (
-    <li className={`daySelectButton h-full w-fit ${isSelected ? "bg-slate-600 rounded-t-xl text-white" : ""}`}>
-      <button
-        onClick={onClick}
-        className={`daySelectButton__button h-fit w-fit py-1 px-2 md::px-3`}
-      >
-        <div className="daySelectButton__content flex flex-col">
-          {text
-            ? <span className="daySelectButton__dayText font-bold">
-              {text}
-            </span>
-            : ""}
-          <span className="daySelectButton__date font-bol whitespace-nowrap">
-            {date}
-          </span>
-        </div>
-      </button>
-    </li>
+    <button
+      onClick={onClick}
+      className={`daySelectButton__button h-fit w-fit text-[1.2rem] py-1 px-2 md::px-3 rounded-[8px] 
+      hover:bg-[var(--sky-color)] hover:text-white
+      duration-300 transition-all
+      ${isSelected ? "bg-[var(--sky-color)] text-white hover:opacity-100" : "hover:opacity-70"}`}
+    >
+      <div className="daySelectButton__content flex flex-col">
+        <span className="daySelectButton__date font-bol whitespace-nowrap">
+          {date}
+        </span>
+      </div>
+    </button>
   )
 }
 
