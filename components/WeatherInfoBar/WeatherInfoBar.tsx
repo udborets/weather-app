@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
-import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
+import DaySelectButtonRow from "@/components/DaySelectButtonRow/DaySelectButtonRow";
 import DayWeatherInfo from "@/components/DayWeatherInfo/DayWeatherInfo";
 import { WeatherListElement, WeatherRequest } from "@/models/weather";
 import { getWeatherLink } from "@/services/weather";
@@ -57,22 +57,14 @@ const WeatherInfoBar = () => {
             >
               {weather.data?.city.name}
             </h4>
-            <div className='weatherInfoBar__content flex w-full h-full justify-center items-center'>
+            <div className='weatherInfoBar__content flex w-full h-full flex-grow justify-center items-center'>
               <div className="weatherInfo flex flex-col w-full min-w-fit h-full">
-                <ul className="weatherInfo__daySelectList flex max-w-full w-fit h-fit">
-                  {[...fiveDaysInfo.keys()].map((key, index) => {
-                    const mapDayWeather = fiveDaysInfo.get(key);
-                    if (mapDayWeather)
-                      return <DaySelectButton
-                        key={key}
-                        isSelected={dayShowing === index}
-                        onClick={() => setDayShowing(index)}
-                        date={mapDayWeather[0].dt_txt.split(' ')[0].slice(5) ?? ""}
-                        text={""}
-                      />
-                  })}
-                </ul>
-                <ul className='weatherInfo__info flex flex-col gap-1 text-black bg-slate-600 p-4 rounded-b-xl'>
+                <DaySelectButtonRow
+                  dayShowing={dayShowing}
+                  setDayShowing={setDayShowing}
+                  fiveDaysInfo={fiveDaysInfo}
+                />
+                <ul className='weatherInfo__info flex flex-col gap-1 flex-grow text-black bg-slate-600 p-4 rounded-b-xl'>
                   {[...fiveDaysInfo.keys()].map((key, index) => {
                     if (dayShowing === index) {
                       const mapDayWeather = fiveDaysInfo.get(key);
