@@ -46,43 +46,25 @@ const WeatherInfoBar = () => {
   useEffect(() => {
     setDayShowing(0);
   }, [chosenCity.id])
+  if (weather.isLoading)
+    return <div>Loading...</div>
   return (
-    <div className={`weatherInfoBar p-4 rounded-[20px] bg-gradient-to-br from-slate-200 to-slate-300 w-full h-fit w-fit shadow-2xl ${style.sun}`}>
-      <div className="weatherInfoBar__container w-full h-full flex flex-col gap-4 items-center justify-center relative">
-        {weather.isLoading
-          ? <span className="weatherInfoBar__loading font-bold text-[2rem]">Loading...</span>
-          : <>
-            <h4
-              className='weatherInfoBar__cityName font-bold text-[1.1rem]'
-            >
-              {weather.data?.city.name}
-            </h4>
-            <div className='weatherInfoBar__content flex w-full h-full flex-grow justify-center items-center'>
-              <div className="weatherInfo flex flex-col w-full min-w-fit h-full">
-                <DaySelectButtonRow
-                  dayShowing={dayShowing}
-                  setDayShowing={setDayShowing}
-                  fiveDaysInfo={fiveDaysInfo}
-                />
-                <ul className='weatherInfo__info flex flex-col gap-1 flex-grow text-black bg-slate-600 p-4 rounded-b-xl'>
-                  {[...fiveDaysInfo.keys()].map((key, index) => {
-                    if (dayShowing === index) {
-                      const mapDayWeather = fiveDaysInfo.get(key);
-                      if (mapDayWeather)
-                        return (
-                          <DayWeatherInfo
-                            weatherInfo={mapDayWeather}
-                            key={key}
-                            className={``}
-                          />
-                        )
-                    }
-                    return <></>
-                  })}
-                </ul>
-              </div>
-            </div>
-          </>}
+    <div className={`weatherInfoBar w-full h-full`}>
+      <h4 className="font-bold ">
+        {weather?.data?.city.name}
+      </h4>
+      <DaySelectButtonRow
+        dayShowing={dayShowing}
+        fiveDaysInfo={fiveDaysInfo}
+        setDayShowing={setDayShowing}
+      />
+      <div className="weatherInfoBar__infoList">
+        {[...fiveDaysInfo.keys()].map((key, index) => {
+          const dayInfo = fiveDaysInfo.get(key)
+          if (dayInfo && index === dayShowing)
+            return <DayWeatherInfo weatherInfo={dayInfo} key={dayInfo[0].dt} />
+          return <></>
+        })}
       </div>
     </div>
   )
