@@ -49,7 +49,7 @@ const WeatherInfoBar = () => {
   if (weather.isLoading)
     return <div>Loading...</div>
   return (
-    <div className={`weatherInfoBar w-full h-full gap-8 flex flex-col`}>
+    <div className={`weatherInfoBar w-full h-full gap-8 flex flex-grow flex-col`}>
       <h4 className="weatherInfoBar__citySelected font-bold text-[1.5rem]">
         City selected: {weather?.data?.city.name}
       </h4>
@@ -58,7 +58,7 @@ const WeatherInfoBar = () => {
         fiveDaysInfo={fiveDaysInfo}
         setDayShowing={setDayShowing}
       />
-      <div className="weatherInfoBar__infoList">
+      <div className="weatherInfoBar__infoList w-full h-full">
         {[...fiveDaysInfo.keys()].map((key, index) => {
           const dayInfo = fiveDaysInfo.get(key)
           if (dayInfo && index === dayShowing)
