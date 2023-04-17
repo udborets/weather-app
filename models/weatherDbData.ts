@@ -1,4 +1,4 @@
-export interface WeatherData {
+export interface WeatherDbData {
   id: number;
   name: string;
   coord: {
