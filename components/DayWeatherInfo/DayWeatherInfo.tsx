@@ -1,4 +1,4 @@
-import { WeatherListElement } from "@/models/weather";
+import { WeatherListElement } from "@/models/weatherRequest";
 
 interface DayWeatherInfoProps {
   weatherInfo: WeatherListElement[];
