@@ -1,4 +1,4 @@
-import { WeatherListElement } from "@/models/weather";
+import { WeatherListElement } from "@/models/weatherRequest";
 import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
 
 interface DaySelectButtonRowProps {
