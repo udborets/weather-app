@@ -1,8 +1,8 @@
-import { WeatherData } from "@/models/weatherData";
+import { WeatherDbData } from "@/models/weatherDbData";
 import {  useChosenCity } from "@/store/useChosenCity";
 
 interface ICitySearchBarItemProps {
-  city?: WeatherData;
+  city?: WeatherDbData;
   noResultText?: string;
   onClick: () => void;
 }

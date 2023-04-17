@@ -7,7 +7,7 @@ import { useQuery } from 'react-query';
 import CitySearchBarItem from '@/components/CitySearchBarItem/CitySearchBarItem';
 import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 import { useDebounce } from '@/hooks/useDebounce';
-import { WeatherData } from '@/models/weatherData';
+import { WeatherDbData } from '@/models/weatherDbData';
 
 const CitySearchBar = () => {
   const [search, setSearch] = useState<string>('');
@@ -20,7 +20,7 @@ const CitySearchBar = () => {
         return [];
       }
       try {
-        const fetchedCities = await axios.get<WeatherData[]>(`/api/cities/${debouncedSearch}`);
+        const fetchedCities = await axios.get<WeatherDbData[]>(`/api/cities/${debouncedSearch}`);
         if (fetchedCities.status !== 200) {
           console.error(fetchedCities);
           return [];

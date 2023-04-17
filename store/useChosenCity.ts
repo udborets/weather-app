@@ -1,10 +1,10 @@
 import { create } from "zustand";
 
-import { WeatherData } from "@/models/weatherData";
+import { WeatherDbData } from "@/models/weatherDbData";
 
 export interface ChosenCityState {
-  chosenCity: WeatherData;
-  setChosenCity: (newCity: WeatherData) => void;
+  chosenCity: WeatherDbData;
+  setChosenCity: (newCity: WeatherDbData) => void;
 }
 
 export const useChosenCity = create<ChosenCityState>((set) => ({
@@ -15,8 +15,8 @@ export const useChosenCity = create<ChosenCityState>((set) => ({
       lat: 0,
       lon: 0,
     },
-  } as WeatherData,
-  setChosenCity: (newCity: WeatherData) =>
+  } as WeatherDbData,
+  setChosenCity: (newCity: WeatherDbData) =>
     set(() => {
       return { chosenCity: newCity };
     }),

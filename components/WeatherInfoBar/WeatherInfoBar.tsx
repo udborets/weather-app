@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import DaySelectButtonRow from "@/components/DaySelectButtonRow/DaySelectButtonRow";
 import DayWeatherInfo from "@/components/DayWeatherInfo/DayWeatherInfo";
 import { WeatherListElement, WeatherRequest } from "@/models/weatherRequest";
-import { getWeatherLink } from "@/services/weather";
+import { getWeatherLink } from "@/services/weatherLink";
 import { useChosenCity } from "@/store/useChosenCity";
 
 const WeatherInfoBar = () => {
