@@ -1,13 +1,13 @@
 'use client'
 
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import CitySearchBarItem from '@/components/CitySearchBarItem/CitySearchBarItem';
 import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 import { useDebounce } from '@/hooks/useDebounce';
-import { City } from '@/models/city';
+import { WeatherData } from '@/models/weatherData';
 
 const CitySearchBar = () => {
   const [search, setSearch] = useState<string>('');
@@ -20,18 +20,13 @@ const CitySearchBar = () => {
         return [];
       }
       try {
-        const fetchedCities = await axios.get<City[]>(`/api/cities/${debouncedSearch}`);
+        const fetchedCities = await axios.get<WeatherData[]>(`/api/cities/${debouncedSearch}`);
         if (fetchedCities.status !== 200) {
           console.error(fetchedCities);
           return [];
         }
         setIsShowingSearchResults(true);
-        const cityNames: string[] = [];
-        return fetchedCities.data.filter((city) => {
-          if (cityNames.includes(city.name)) return false;
-          cityNames.push(city.name);
-          return true;
-        })
+        return fetchedCities.data;
       }
       catch (e: unknown) {
         console.error(e);
