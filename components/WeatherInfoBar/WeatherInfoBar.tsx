@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 
 import DaySelectButtonRow from "@/components/DaySelectButtonRow/DaySelectButtonRow";
 import DayWeatherInfo from "@/components/DayWeatherInfo/DayWeatherInfo";
-import { WeatherListElement, WeatherRequest } from "@/models/weather";
+import { WeatherListElement, WeatherRequest } from "@/models/weatherRequest";
 import { getWeatherLink } from "@/services/weather";
 import { useChosenCity } from "@/store/useChosenCity";
 
@@ -22,17 +22,17 @@ const WeatherInfoBar = () => {
         fiveDaysInfoKeys.map((key) => {
           fiveDaysInfo.set(key, []);
         })
+        fetchedWeather.list.forEach((listInfoItem) => {
+          const listInfoItemDay = listInfoItem.dt_txt.split(' ')[0];
+          const mapDayWeather = fiveDaysInfo.get(listInfoItemDay);
+          if (!mapDayWeather?.length) {
+            fiveDaysInfo.set(listInfoItemDay, [listInfoItem]);
+          }
+          if (mapDayWeather?.length) {
+            mapDayWeather.push(listInfoItem);
+          }
+        })
       }
-      fetchedWeather.list.forEach((listInfoItem) => {
-        const listInfoItemDay = listInfoItem.dt_txt.split(' ')[0];
-        const mapDayWeather = fiveDaysInfo.get(listInfoItemDay);
-        if (!mapDayWeather?.length) {
-          fiveDaysInfo.set(listInfoItemDay, [listInfoItem]);
-        }
-        if (mapDayWeather?.length) {
-          mapDayWeather.push(listInfoItem);
-        }
-      })
       return fetchedWeather;
     },
     queryKey: [chosenCity.id],
