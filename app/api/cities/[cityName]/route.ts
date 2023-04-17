@@ -1,41 +1,14 @@
-import { ConnectOptions, MongoClient } from "mongodb";
+import citiesData from "@/data/cities.json"
+import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { cityName: string } }
+  { params: { cityName } }: { params: { cityName: string } }
 ) {
-  const agg = [
-    {
-      $search: {
-        index: "searchCities",
-        autocomplete: {
-          query: params.cityName,
-          path: "name",
-        },
-      },
-    },
-  ];
-
-  const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  } as ConnectOptions;
-  if (!process.env.NEXT_PUBLIC_MONGODB_CONFIG) {
-    console.error("can't get mongodb config");
-    return new Response(JSON.stringify({ error: "can't get mongodb config" }));
-  }
-  try {
-    const client = await MongoClient.connect(
-      process.env.NEXT_PUBLIC_MONGODB_CONFIG,
-      options
-    );
-    const coll = client.db("udborets").collection("cities");
-    const cursor = coll.aggregate(agg);
-    const result = await cursor.toArray();
-    await client.close();
-    return new Response(JSON.stringify(result));
-  } catch (e) {
-    console.error(e);
-    return new Response(JSON.stringify(e));
-  }
+  
+  return NextResponse.json(
+    citiesData.filter((item: { id: number; name: string }) => {
+      return item.name.toLowerCase().includes(cityName.toLowerCase());
+    })
+  );
 }
