@@ -4,7 +4,6 @@ import '@/styles/global.scss';
 export const metadata = {
   title: 'My Weather',
   description: 'Weather prediction frontend app by Yury Borets',
-
 }
 
 export default function RootLayout({

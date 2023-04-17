@@ -1,5 +1,6 @@
-import citiesData from "@/data/cities.json"
 import { NextResponse } from "next/server";
+
+import citiesData from "@/data/cities.json";
 
 export async function GET(
   request: Request,

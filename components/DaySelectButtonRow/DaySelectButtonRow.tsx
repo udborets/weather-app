@@ -1,5 +1,5 @@
-import { WeatherListElement } from "@/models/weatherRequest";
 import DaySelectButton from "@/components/DaySelectButton/DaySelectButton";
+import { WeatherListElement } from "@/models/weatherRequest";
 
 interface DaySelectButtonRowProps {
   fiveDaysInfo: Map<string, WeatherListElement[]>;
