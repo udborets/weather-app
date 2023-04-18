@@ -4,5 +4,6 @@ export interface WeatherDbData {
   coord: {
     lat: number;
     lon: number;
-  }
+  };
+  country: string;
 }
