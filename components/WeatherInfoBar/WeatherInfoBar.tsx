@@ -17,22 +17,20 @@ const WeatherInfoBar = () => {
       const weatherLink = getWeatherLink(chosenCity.coord);
       if (!weatherLink) return null;
       const { data: fetchedWeather } = (await axios.get<WeatherRequest>(weatherLink));
-      if (fetchedWeather.city.id !== chosenCity.id) {
-        const fiveDaysInfoKeys = [...fiveDaysInfo.keys()]
-        fiveDaysInfoKeys.map((key) => {
-          fiveDaysInfo.set(key, []);
-        })
-        fetchedWeather.list.forEach((listInfoItem) => {
-          const listInfoItemDay = listInfoItem.dt_txt.split(' ')[0];
-          const mapDayWeather = fiveDaysInfo.get(listInfoItemDay);
-          if (!mapDayWeather?.length) {
-            fiveDaysInfo.set(listInfoItemDay, [listInfoItem]);
-          }
-          if (mapDayWeather?.length) {
-            mapDayWeather.push(listInfoItem);
-          }
-        })
-      }
+      const fiveDaysInfoKeys = [...fiveDaysInfo.keys()]
+      fiveDaysInfoKeys.map((key) => {
+        fiveDaysInfo.set(key, []);
+      })
+      fetchedWeather.list.forEach((listInfoItem) => {
+        const listInfoItemDay = listInfoItem.dt_txt.split(' ')[0];
+        const mapDayWeather = fiveDaysInfo.get(listInfoItemDay);
+        if (!mapDayWeather?.length) {
+          fiveDaysInfo.set(listInfoItemDay, [listInfoItem]);
+        }
+        if (mapDayWeather?.length) {
+          mapDayWeather.push(listInfoItem);
+        }
+      })
       return fetchedWeather;
     },
     queryKey: [chosenCity.id],
