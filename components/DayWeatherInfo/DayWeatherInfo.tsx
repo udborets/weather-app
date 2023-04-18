@@ -4,6 +4,7 @@ interface DayWeatherInfoProps {
   weatherInfo: WeatherListElement[];
 }
 const DayWeatherInfo = ({ weatherInfo }: DayWeatherInfoProps) => {
+  console.log(weatherInfo)
   return (
     <ul className={`dayWeatherInfo__list grid grid-cols-2 justify-items-center sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 lg:gap-6 w-full`}>
       {weatherInfo.map((timeInfo) => {
@@ -20,16 +21,15 @@ const DayWeatherInfo = ({ weatherInfo }: DayWeatherInfoProps) => {
             </span>
             {timeInfo.main.temp}&#8451;
             <span className="font-bold">
-              Min temperature:
+              Feels like:
             </span>
-            {timeInfo.main.temp_min}&#8451;
-            <span className="font-bold">
-              Max temperature:
-            </span>
-            {timeInfo.main.temp_max}&#8451;
-            <span className="font-bold">
-              Feels like:</span>
             {timeInfo.main.feels_like}&#8451;
+            <span>
+            </span>
+            <span className="font-bold">
+              {timeInfo.weather[0].main}
+            </span>
+            {timeInfo.weather[0].description}
           </div>
         )
       })}
