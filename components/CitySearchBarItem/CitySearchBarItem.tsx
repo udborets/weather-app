@@ -27,9 +27,9 @@ const CitySearchBarItem = ({ city, onClick, noResultText }: ICitySearchBarItemPr
           ? city.name
           : <span className="searchBarResult__cityName">{city.name.slice(0, 28)}...</span>
           : ''}
-        {/* <span className='searchBarResult__country absolute top-[0px] right-0 opacity-40 font-bold'>
+        <span className='searchBarResult__country absolute top-[0px] right-0 opacity-40 font-bold'>
           {city ? city.country : ''}
-        </span> */}
+        </span>
       </div>
     </div>
   )
