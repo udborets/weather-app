@@ -14,7 +14,7 @@
 
 ## Tech Stack :computer:
 
-**[React](https://react.dev/), [Next](https://nextjs.org/), [TailwindCSS](https://tailwindcss.com/), [Zustand](https://zustand-demo.pmnd.rs/), [MongoDB](https://www.mongodb.com/), [SCSS](https://sass-lang.com/)**
+**[React](https://react.dev/), [Next](https://nextjs.org/), [Zustand](https://zustand-demo.pmnd.rs/), [SCSS](https://sass-lang.com/), [TailwindCSS](https://tailwindcss.com/)**
 
 <a id="todolink"></a>
 
